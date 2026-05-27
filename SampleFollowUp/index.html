@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Quick Response &mdash; Mary Kay</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:radial-gradient(ellipse at 20% 50%,#3d0a1e 0%,#1a0d13 50%,#0d0608 100%);}
+:root{--pink:#e8507a;--pink-dark:#c93a62;--gold:#c9a96e;--dark:#2a1a20;--text:#3d2530;--gray:#8a7a80;--pale:#fff5f8;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Jost',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+.card{background:white;border-radius:20px;padding:clamp(28px,5vw,48px);max-width:520px;width:100%;box-shadow:0 8px 48px rgba(0,0,0,0.3);}
+.mk-badge{font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;font-weight:300;}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,4vw,2rem);color:var(--dark);margin-bottom:20px;line-height:1.3;}
+.q-label{font-size:12px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;font-weight:600;display:block;}
+.btn-group{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:4px;}
+.choice-btn{flex:1;min-width:100px;padding:13px 20px;border:1.5px solid #e8d5db;border-radius:50px;background:white;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;color:var(--text);cursor:pointer;transition:all 0.2s;text-align:center;}
+.choice-btn:hover{border-color:var(--pink);color:var(--pink);}
+.choice-btn.selected{background:var(--pink);color:white;border-color:var(--pink);}
+.choice-btn.selected-no{background:#f5f0ff;color:#6b3fa0;border-color:#6b3fa0;}
+.btn-primary{background:linear-gradient(135deg,var(--pink),var(--pink-dark));color:white;border:none;padding:14px 32px;font-family:'Jost',sans-serif;font-weight:600;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;border-radius:50px;transition:all 0.3s;display:block;width:100%;text-align:center;margin-top:16px;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,80,122,0.4);}
+.btn-primary:disabled{opacity:0.6;cursor:not-allowed;transform:none;box-shadow:none;}
+textarea{width:100%;padding:12px 14px;border:1.5px solid #e8d5db;border-radius:10px;font-family:'Jost',sans-serif;font-size:14px;color:var(--text);outline:none;resize:vertical;min-height:100px;transition:border 0.2s;margin-top:16px;display:block;}
+textarea:focus{border-color:var(--pink);}
+.step{display:none;}
+.step.active{display:block;}
+.product-links{display:flex;flex-direction:column;gap:10px;margin:16px 0;}
+.product-link-item{padding:12px 16px;background:var(--pale);border:1px solid #f0d8e0;border-radius:10px;font-size:13px;}
+.product-link-item a{color:var(--pink);font-weight:500;text-decoration:none;}
+.success-box{text-align:center;padding:8px 0;}
+.success-icon{font-size:48px;margin-bottom:16px;}
+.success-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--dark);margin-bottom:12px;}
+.success-sub{font-size:13px;color:var(--gray);line-height:1.8;}
+.sig{margin-top:24px;text-align:center;}
+.sig p{font-family:'Cormorant Garamond',serif;font-size:15px;color:#6b3fa0;font-style:italic;margin:0;}
+.sig span{font-size:10px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="mk-badge">Mary Kay &nbsp;&middot;&nbsp; Sample Follow-Up</div>
+
+  <!-- STEP 1: Did you get the samples? -->
+  <div id="step1" class="step active">
+    <div class="card-title">Quick Check-In!</div>
+    <span class="q-label">Did you get the samples?</span>
+    <div class="btn-group">
+      <button class="choice-btn" data-val="yes" onclick="selectAndGo('got','yes')">Yes, I got them!</button>
+      <button class="choice-btn" data-val="no" onclick="selectAndGo('got','no')">No, not yet</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Have you tried them? -->
+  <div id="step2" class="step">
+    <div class="card-title">Quick Check-In!</div>
+    <span class="q-label">Have you had a chance to try them out?</span>
+    <div class="btn-group">
+      <button class="choice-btn" data-val="yes" onclick="selectAndGo('tried','yes')">Yes, I have!</button>
+      <button class="choice-btn" data-val="no" onclick="selectAndGo('tried','no')">Not yet</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Do you like them? -->
+  <div id="step3" class="step">
+    <div class="card-title">Quick Check-In!</div>
+    <span class="q-label">Do you like them?</span>
+    <div class="btn-group">
+      <button class="choice-btn" data-val="yes" onclick="selectAndGo('like','yes')">Yes, I love them!</button>
+      <button class="choice-btn" data-val="no" onclick="selectAndGo('like','no')">Not quite</button>
+    </div>
+  </div>
+
+  <!-- STEP 4a: Love them -->
+  <div id="step-love" class="step">
+    <div class="card-title">What are you waiting for? &#127881;</div>
+    <p style="font-size:13px;color:var(--gray);line-height:1.8;margin-bottom:16px;">Your skin has spoken! Shop directly from my Mary Kay store:</p>
+    <div id="love-product-links" class="product-links"></div>
+    <div class="sig"><p>Skin-cerely yours, Hali Sarah Parsons</p><span>Independent Beauty Consultant</span></div>
+  </div>
+
+  <!-- STEP 4b: Dislike feedback -->
+  <div id="step-dislike" class="step">
+    <div class="card-title">Let&#8217;s find your perfect match</div>
+    <p style="font-size:13px;color:var(--gray);line-height:1.8;">Please list your dislikes below and I will get back to you with better options!</p>
+    <textarea id="dislike-feedback" placeholder="e.g. The moisturizer felt too heavy, the cleanser dried out my skin..."></textarea>
+    <button class="btn-primary" id="feedback-btn" onclick="sendFeedback()">Send Results to Sarah &rarr;</button>
+  </div>
+
+  <!-- SUCCESS: feedback sent -->
+  <div id="step-feedback-sent" class="step">
+    <div class="success-box">
+      <div class="success-icon">&#10024;</div>
+      <div class="success-title">Message Sent!</div>
+      <p class="success-sub">I really appreciate you taking the time to send me your feedback! After reviewing your feedback, I’ll follow up with new recommendations just for you! Let’s figure out what will get your skin feeling amazing &#127803;</p>
+      <div class="sig" style="margin-top:20px;"><p>Skin-cerely yours, Hali Sarah Parsons</p><span>Independent Beauty Consultant</span></div>
+    </div>
+  </div>
+
+  <!-- SUCCESS: not tried yet -->
+  <div id="step-not-tried" class="step">
+    <div class="success-box">
+      <div class="success-icon">&#10024;</div>
+      <div class="success-title">Got it!</div>
+      <p class="success-sub">I really appreciate you taking the time to send me your feedback! No rush &mdash; whenever you are ready to try them, I am here to help.</p>
+      <div class="sig" style="margin-top:20px;"><p>Skin-cerely yours, Hali Sarah Parsons</p><span>Independent Beauty Consultant</span></div>
+    </div>
+  </div>
+
+  <!-- SUCCESS: not received -->
+  <div id="step-not-received" class="step">
+    <div class="success-box">
+      <div class="success-icon">&#10024;</div>
+      <div class="success-title">I&#8217;m on it!</div>
+      <p class="success-sub">I really appreciate you taking the time to send me your feedback! In the meantime&mdash;if you just can&#8217;t wait&mdash;here are/is your product(s) link(s):</p>
+      <div id="not-received-links" class="product-links" style="text-align:left;margin-top:16px;"></div>
+      <div class="sig" style="margin-top:20px;"><p>Skin-cerely yours, Hali Sarah Parsons</p><span>Independent Beauty Consultant</span></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var EJS_SERVICE_ID  = 'MaryKay';
+var EJS_TEMPLATE_ID = 'template_z5qi34i';
+var CONSULTANT_EMAIL = 'sistahaymarykay@gmail.com';
+
+window.addEventListener('load', function(){
+  // Check for start param
+  var startParam = params.get('start');
+  if(startParam === 'step3'){
+    // Skip to "Do you like them?" step
+    showStep('step3');
+  }
+  if(window.emailjs) emailjs.init({publicKey: 'zmLo4nV99WWp2KjiR'});
+  buildLinks('not-received-links', false);
+  buildLinks('love-product-links', true);
+});
+
+var params    = new URLSearchParams(window.location.search);
+var custName  = params.get('name')  || 'Customer';
+var custEmail = params.get('email') || '';
+
+function getProducts(){
+  var raw = params.get('products') || '';
+  if(!raw) return [];
+  return raw.split(',').map(function(p){
+    var parts = p.split('|');
+    return {name: decodeURIComponent(parts[0]||''), url: decodeURIComponent(parts[1]||'')};
+  }).filter(function(p){ return p.name; });
+}
+var products = getProducts();
+
+function buildLinks(containerId, buyStyle){
+  var el = document.getElementById(containerId);
+  if(!el || !products.length) return;
+  el.innerHTML = products.map(function(p){
+    return '<div class="product-link-item"><a href="'+p.url+'" target="_blank">&#9756; '+p.name+(buyStyle?' &rarr;':'')+'</a></div>';
+  }).join('');
+}
+
+function showStep(id){
+  var steps = document.querySelectorAll('.step');
+  for(var i=0;i<steps.length;i++) steps[i].classList.remove('active');
+  var el = document.getElementById(id);
+  if(el) el.classList.add('active');
+}
+
+function selectAndGo(question, val){
+  var stepMap = {got:'step1', tried:'step2', like:'step3'};
+  var stepId = stepMap[question];
+  if(stepId){
+    var btns = document.querySelectorAll('#'+stepId+' .choice-btn');
+    for(var i=0;i<btns.length;i++){
+      btns[i].classList.remove('selected','selected-no');
+      if(btns[i].getAttribute('data-val')===val)
+        btns[i].classList.add(val==='yes'?'selected':'selected-no');
+    }
+  }
+  if(question==='got'){
+    if(val==='yes'){ setTimeout(function(){ showStep('step2'); }, 180); }
+    else { sendNotReceived(); }
+  } else if(question==='tried'){
+    if(val==='yes'){ setTimeout(function(){ showStep('step3'); }, 180); }
+    else { sendNotTried(); }
+  } else if(question==='like'){
+    if(val==='yes'){
+      sendSampleSuccess();
+      setTimeout(function(){ showStep('step-love'); }, 180);
+    }
+    else { setTimeout(function(){ showStep('step-dislike'); }, 180); }
+  }
+}
+
+function emailWrap(inner){
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{margin:0;padding:24px 16px;background:#fdf6f8;font-family:Jost,Arial,sans-serif;}.wrap{max-width:600px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;}.hdr{background:linear-gradient(135deg,#e8507a,#c93a62);padding:32px 40px;text-align:center;}.hdr h1{margin:0;font-family:Cormorant Garamond,Georgia,serif;font-size:28px;font-weight:300;color:#fff;letter-spacing:3px;text-transform:uppercase;}.hdr p{margin:6px 0 0;font-size:12px;color:rgba(255,255,255,.85);letter-spacing:2px;text-transform:uppercase;}.body{padding:32px 40px;}.row{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap;}.field{flex:1;min-width:140px;}.field-lbl{font-size:9px;color:#c9a96e;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px;}.field-val{font-size:13px;color:#2a1a20;border-bottom:1px solid #f0e8eb;padding-bottom:4px;}.sec-title{background:linear-gradient(90deg,#e8507a,#c9a96e);color:#fff;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:7px 14px;border-radius:4px;margin-bottom:14px;}.ftr{background:#fce4ec;padding:18px 40px;text-align:center;font-size:11px;color:#a06070;}.ftr a{color:#e8507a;text-decoration:none;}</style></head><body><div style="padding:24px 16px;background:#fdf6f8;"><div class="wrap">'+inner+'<div class="ftr">Mary Kay Independent Beauty Consultant<br><a href="mailto:sistahaymarykay@gmail.com">sistahaymarykay@gmail.com</a></div></div></div></body></html>';
+}
+
+function customerRows(){
+  return '<div class="row"><div class="field"><div class="field-lbl">Name</div><div class="field-val">'+custName+'</div></div><div class="field"><div class="field-lbl">Email</div><div class="field-val">'+(custEmail||'--')+'</div></div></div>';
+}
+
+function prodRows(){
+  if(!products.length) return '<p style="color:#b09090;font-style:italic;">No products on file.</p>';
+  return products.map(function(p){
+    return '<div style="padding:8px 0;border-bottom:1px solid #f0e8eb;"><a href="'+p.url+'" target="_blank" style="color:#e8507a;text-decoration:none;font-weight:500;">&#9756; '+p.name+'</a></div>';
+  }).join('');
+}
+
+function sendNotReceived(){
+  var html = emailWrap('<div class="hdr"><h1>Mary Kay</h1><p>SAMPLES NOT RECEIVED</p></div><div class="body"><div class="sec-title">Customer Details</div>'+customerRows()+'<div class="sec-title" style="margin-top:16px;">Products Requested</div>'+prodRows()+'</div>');
+  if(window.emailjs){
+    emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {to_email:CONSULTANT_EMAIL,subject:'SAMPLES NOT RECEIVED -- '+custName,message:html,reply_to:custEmail||CONSULTANT_EMAIL,name:custName}).then(function(){ showStep('step-not-received'); },function(){ showStep('step-not-received'); });
+  } else { showStep('step-not-received'); }
+}
+
+function sendNotTried(){
+  var html = emailWrap('<div class="hdr"><h1>Mary Kay</h1><p>SAMPLES NOT TRIED YET</p></div><div class="body"><div class="sec-title">Customer Details</div>'+customerRows()+'<div class="sec-title" style="margin-top:16px;">Products Sent</div>'+prodRows()+'</div>');
+  if(window.emailjs){
+    emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {to_email:CONSULTANT_EMAIL,subject:'SAMPLES NOT TRIED YET -- '+custName,message:html,reply_to:custEmail||CONSULTANT_EMAIL,name:custName}).then(function(){ showStep('step-not-tried'); },function(){ showStep('step-not-tried'); });
+  } else { showStep('step-not-tried'); }
+}
+
+function sendFeedback(){
+  var feedback = document.getElementById('dislike-feedback').value.trim();
+  if(!feedback){ alert('Please share what you did not like so Hali Sarah can help!'); return; }
+  var btn = document.getElementById('feedback-btn');
+  btn.textContent = 'Sending...'; btn.disabled = true;
+  var html = emailWrap('<div class="hdr"><h1>Mary Kay</h1><p>Sample Feedback</p></div><div class="body"><div class="sec-title">Customer Details</div>'+customerRows()+'<div class="sec-title" style="margin-top:16px;">Their Feedback</div><p style="font-size:14px;color:#3d2530;line-height:1.9;background:#fff5f8;padding:16px;border-radius:10px;border-left:3px solid #e8507a;margin:0 0 20px;">'+feedback+'</p><div class="sec-title">Products They Sampled</div>'+prodRows()+'</div>');
+  if(window.emailjs){
+    emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {to_email:CONSULTANT_EMAIL,subject:'Sample Feedback -- '+custName,message:html,reply_to:custEmail||CONSULTANT_EMAIL,name:custName}).then(function(){ showStep('step-feedback-sent'); },function(e){ console.warn(e); btn.textContent='Send Results to Sarah'; btn.disabled=false; alert('Error sending. Please try again.'); });
+  } else { btn.textContent='Send Results to Sarah'; btn.disabled=false; alert('Email service not loaded. Please refresh and try again.'); }
+}
+
+function sendSampleSuccess(){
+  var html = emailWrap(
+    '<div class="hdr"><h1>Mary Kay</h1><p>SAMPLE SUCCESS</p></div>' +
+    '<div class="body">' +
+      '<p style="font-size:14px;color:#3d2530;line-height:1.8;margin:0 0 16px;"><strong>' + custName + '</strong> (' + custEmail + ') loved their samples!</p>' +
+      '<div style="margin-top:16px;">' + prodRows() + '</div>' +
+      '<p style="font-size:12px;color:#8a7a80;margin-top:16px;">No order detected yet. A follow-up email will be sent in 24 hours.</p>' +
+    '</div>'
+  );
+  if(window.emailjs){
+    emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {
+      to_email: CONSULTANT_EMAIL,
+      subject: 'SAMPLE SUCCESS — ' + custName,
+      message: html,
+      reply_to: custEmail || CONSULTANT_EMAIL,
+      name: custName
+    }).then(function(){ console.log('SAMPLE SUCCESS email sent'); }, function(e){ console.warn('SAMPLE SUCCESS email error:', e); });
+  }
+}
+
+</script>
+</body>
+</html>
