@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bracketed Skin Assessment — Mary Kay</title>
+<!-- SEO -->
+
+<meta name="robots" content="index, follow">
+
+<meta name="author" content="Hali Sarah Parsons">
+<meta name="theme-color" content="#e8507a">
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Bracketed Skin Assessment — Mary Kay", "description": "Bracketed Mary Kay skin assessment — compare your skin concerns side by side and get tailored product matches from an Independent Beauty Consultant in Atascocita, TX.", "url": "https://marykay.iqproductionz.com/BracketAssess/", "provider": {"@type": "Person", "name": "Hali Sarah Parsons", "jobTitle": "Independent Beauty Consultant, Mary Kay", "address": {"@type": "PostalAddress", "addressLocality": "Atascocita", "addressRegion": "TX", "addressCountry": "US"}}}</script>
+<!-- /SEO -->
 
 <!-- SESSION ID + PROGRESS SAVE/RESUME -->
 <script>
@@ -120,7 +129,6 @@ function clearProgress(){ try { localStorage.removeItem('mk_p_' + window._sessio
   #screen-home .hero-title { animation: hfadeUp 1s ease forwards; animation-delay:0.5s; opacity:0; }
   #screen-home .hero-divider { animation: hfadeUp 1s ease forwards; animation-delay:0.9s; opacity:0; }
   @keyframes hfadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
 
   /* BUTTONS — all fully rounded */
   .btn-primary {
@@ -341,6 +349,19 @@ function clearProgress(){ try { localStorage.removeItem('mk_p_' + window._sessio
   .success-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--dark); margin-bottom: 12px; }
   .success-sub { font-size: 14px; color: var(--gray); line-height: 1.9; margin-bottom: 28px; }
 </style>
+  <!-- SEO:start (written by seo_wire.py; search data only, nothing visible) -->
+  <meta name="description" content="Bracketed Mary Kay skin assessment — compare your skin concerns side by side and get tailored product matches from an Independent Beauty Consultant in…">
+  <link rel="canonical" href="https://marykay.iqproductionz.com/BracketAssess/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mary Kay by Hali Sarah">
+  <meta property="og:title" content="Bracketed Skin Assessment — Mary Kay">
+  <meta property="og:description" content="Bracketed Mary Kay skin assessment — compare your skin concerns side by side and get tailored product matches from an Independent Beauty Consultant in…">
+  <meta property="og:url" content="https://marykay.iqproductionz.com/BracketAssess/">
+  <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://marykay.iqproductionz.com/BracketAssess/BracketAsess.jpg">
+  <meta name="twitter:title" content="Bracketed Skin Assessment — Mary Kay">
+  <meta name="twitter:description" content="Bracketed Mary Kay skin assessment — compare your skin concerns side by side and get tailored product matches from an Independent Beauty Consultant in…">
+  <!-- SEO:end -->
 </head>
 <body>
 
@@ -431,7 +452,6 @@ function clearProgress(){ try { localStorage.removeItem('mk_p_' + window._sessio
     </div>
   </div>
 </div>
-
 
 <!-- ═══════ AGE RANGE ═══════ -->
 <div id="screen-age" class="screen">
@@ -565,7 +585,6 @@ function clearProgress(){ try { localStorage.removeItem('mk_p_' + window._sessio
     </div>
   </div>
 </div>
-
 
 <!-- ═══════ PROFILE FORM (includes consent + signature) ═══════ -->
 <div id="screen-profile" class="screen">
@@ -746,7 +765,6 @@ function clearProgress(){ try { localStorage.removeItem('mk_p_' + window._sessio
       </div>
     </div>
 
-
     <!-- SAMPLE SELECTION DROPDOWN -->
     <div class="section-title" style="margin-top:28px;">Your Free Sample Selections <span style="font-size:12px;color:var(--gray);font-weight:400;font-family:'Jost',sans-serif;">— click to expand</span></div>
     <div style="background:var(--pink-pale);border:1px solid #f0d8e0;border-radius:12px;padding:16px 18px;margin-bottom:20px;">
@@ -805,7 +823,6 @@ function clearProgress(){ try { localStorage.removeItem('mk_p_' + window._sessio
       <label class="consent-check"><input type="checkbox" id="int-money"> Earning extra money</label>
     </div>
 
-
     <!-- ANYTHING ELSE -->
     <div class="section-title" style="margin-top:28px;">Anything Else You Want to Share?</div>
     <textarea id="prof-notes" class="form-input" rows="4" placeholder="Feel free to share anything else about your skin, lifestyle, or questions you have for Hali Sarah..." style="width:100%;resize:vertical;min-height:100px;margin-top:4px;"></textarea>
@@ -849,7 +866,6 @@ function clearProgress(){ try { localStorage.removeItem('mk_p_' + window._sessio
     </div>
   </div>
 </div>
-
 
 <!-- ═══════ CONSULTANT OPPORTUNITY SCREEN ═══════ -->
 <div id="screen-consultant" class="screen">
@@ -1551,7 +1567,6 @@ function onCityChange(){
   addrSec.style.display='block';
 }
 
-
 // ═══════════════════════════════════════════════════
 //  SIGNATURE CONFIRM MODAL
 //  Continue = left (primary), Go Back & Sign = right (secondary/cancel)
@@ -2058,7 +2073,6 @@ function buildFutureProductHtml(products){
     </details>
   </div>`;
 }
-
 
 // ═══ EMAIL INBOX ROUTER ═══
 function openEmailInbox(){
@@ -2601,7 +2615,6 @@ window.scrollTo(0, 0);
   }, 150);
 })();
 
-
 // ── SAMPLE DROPDOWN ──
 function toggleSampleDropdown(){
   var body=document.getElementById('sample-dropdown-body');
@@ -2661,7 +2674,6 @@ function getSampleSelections(){
   checked.forEach(function(ch){items.push({name:ch.dataset.name,url:ch.dataset.url});});
   return{items:items,addr:(document.getElementById('sample-addr')||{value:''}).value.trim(),city:(document.getElementById('sample-city')||{value:''}).value.trim(),st:(document.getElementById('sample-state')||{value:''}).value.trim(),zip:(document.getElementById('sample-zip')||{value:''}).value.trim()};
 }
-
 
 function toggleAllConsent(master){
   ['consent-contact','consent-data','consent-personalized','consent-profile'].forEach(function(id){
