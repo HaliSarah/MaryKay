@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!--
+  Title: Mary Kay Branded Redirect
+  Author: Hali Sarah Parsons
+  Date: 2026-10-16
+  Modified By: Claude
+  Description: Root landing page for MaryKay.IQProductionz.com. Shows a branded
+               Mary Kay loading screen over the Career Car imagery, then forwards
+               visitors (with any tracking parameters) to the main Mary Kay site.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mary Kay by Hali Sarah</title>
+<!-- WHY: a pass-through page shouldn't compete in search with the real pages; "follow" still passes link value -->
+<meta name="robots" content="noindex, follow">
+<meta name="description" content="Mary Kay with Hali Sarah Parsons, Independent Beauty Consultant in Atascocita, TX.">
+<meta name="theme-color" content="#0d0609">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mary Kay by Hali Sarah">
+<meta property="og:title" content="Mary Kay by Hali Sarah">
+<meta property="og:description" content="Skincare, color and the Mary Kay opportunity with Hali Sarah Parsons, Independent Beauty Consultant in Atascocita, TX.">
+<meta property="og:url" content="https://marykay.iqproductionz.com/">
+<meta property="og:image" content="https://marykay.iqproductionz.com/assets/redirect/pink-cadillac.jpg">
+<meta property="og:image:width" content="1080">
+<meta property="og:image:height" content="1350">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://marykay.iqproductionz.com/assets/redirect/pink-cadillac.jpg">
+<!-- WHY: no-JS fallback so visitors are never stranded; delay is longer than the JS timer so the animation normally wins -->
+<meta http-equiv="refresh" content="7; url=https://sistahaymarykay.wixsite.com/marykay">
+<link rel="preload" as="image" href="assets/redirect/pink-cadillac.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#e8507a; --pink-soft:#f6a9c3; --blush:#fbd3e0;
+    --plum:#3a0f2a; --gold:#c9a96e; --gold-lt:#ead5a8; --ink:#0d0609;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--ink);color:#fff;font-family:Jost,system-ui,sans-serif;overflow:hidden}
+
+  /* ---------- Background: crossfading Career Cars ---------- */
+  .bg{position:fixed;inset:0;overflow:hidden}
+  .bg img{
+    position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;object-position:50% 48%;
+    opacity:0;filter:saturate(1.1) blur(1.5px);
+    /* WHY: slow zoom + 3-way stagger gives motion without distracting from the logo */
+    animation:fade 7.5s ease-in-out infinite, drift 7.5s linear infinite;
+  }
+  /* WHY: first image starts already faded in (negative delay) so there's never a blank black frame */
+  .bg img:nth-child(1){animation-delay:-.75s,-.75s}
+  .bg img:nth-child(2){animation-delay:1.75s,1.75s}
+  .bg img:nth-child(3){animation-delay:4.25s,4.25s}
+  @keyframes fade{0%{opacity:0}10%{opacity:1}40%{opacity:1}48%{opacity:0}100%{opacity:0}}
+  @keyframes drift{from{transform:scale(1)}to{transform:scale(1.09)}}
+
+  /* WHY: transparent black screen + plum floor keeps pink text legible over a white-background photo */
+  .veil{position:fixed;inset:0;
+    background:
+      radial-gradient(ellipse at 50% 35%, rgba(13,6,9,.38) 0%, rgba(13,6,9,.70) 75%),
+      linear-gradient(180deg, rgba(13,6,9,.40) 0%, rgba(13,6,9,.55) 50%, rgba(58,15,42,.92) 100%);
+  }
+
+  /* ---------- Floating sparkles ---------- */
+  .sparkles{position:fixed;inset:0;pointer-events:none}
+  .sparkles i{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;
+    background:var(--gold-lt);box-shadow:0 0 8px var(--gold);opacity:0;animation:rise linear infinite}
+  .sparkles i:nth-child(even){background:var(--pink-soft);box-shadow:0 0 8px var(--pink)}
+  @keyframes rise{0%{transform:translateY(0) scale(.6);opacity:0}15%{opacity:.9}100%{transform:translateY(-95vh) scale(1.2);opacity:0}}
+
+  /* ---------- Content: bottom-weighted stack ---------- */
+  main{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;
+    justify-content:flex-end;text-align:center;padding:0 16px calc(9vh + env(safe-area-inset-bottom))}
+  .eyebrow{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold-lt);
+    opacity:0;animation:up 1s .3s ease forwards}
+  h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:300;line-height:.9;
+    font-size:clamp(64px,15vw,150px);letter-spacing:.06em;margin:.18em 0 .08em;
+    background:linear-gradient(100deg,var(--pink) 0%,var(--pink-soft) 30%,#fff3f7 45%,var(--pink-soft) 60%,var(--pink) 100%);
+    background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+    /* WHY: a single light sweep reads as "luxury cosmetics" sheen rather than a flashing effect */
+    opacity:0;animation:up 1.2s .6s ease forwards, sheen 3.2s 1.4s ease-in-out infinite}
+  .by{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(18px,3.6vw,24px);
+    color:var(--blush);opacity:0;animation:up 1s 1s ease forwards}
+  .rule{width:64px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin:22px auto 26px;opacity:0;animation:up 1s 1.2s ease forwards}
+  @keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes sheen{0%{background-position:100% 0}60%,100%{background-position:0 0}}
+
+  /* ---------- Loader: swirling pink ring ---------- */
+  .loader{position:relative;width:92px;height:92px;opacity:0;animation:up 1s 1.3s ease forwards}
+  .loader svg{position:absolute;inset:0;width:100%;height:100%}
+  .ring-a{animation:spin 1.6s cubic-bezier(.55,.15,.45,.85) infinite}
+  .ring-b{animation:spin 3.2s linear infinite reverse}
+  .ring-c{animation:spin 2.4s ease-in-out infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .loader .core{position:absolute;inset:0;display:grid;place-items:center;
+    font-family:"Cormorant Garamond",serif;font-size:26px;font-style:italic;color:var(--pink-soft);
+    animation:breathe 2.4s ease-in-out infinite}
+  @keyframes breathe{50%{transform:scale(1.12);color:#fff}}
+
+  .status{margin-top:22px;height:20px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#f3dfe6}
+  .status span{display:inline-block;transition:opacity .5s ease,transform .5s ease}
+  .status span.out{opacity:0;transform:translateY(6px)}
+  .bar{width:min(240px,60vw);height:2px;margin-top:16px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}
+  .bar b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--gold));
+    box-shadow:0 0 10px var(--pink)}
+  .skip{margin-top:18px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lt);
+    text-decoration:none;opacity:.7;border-bottom:1px solid transparent}
+  .skip:hover,.skip:focus-visible{opacity:1;border-color:var(--gold)}
+
+  /* WHY: on tall phones the poster text sits behind the logo; extra blur keeps it from competing */
+  @media (max-aspect-ratio:3/4){.bg img{filter:saturate(1.1) blur(4px)}}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}
+    .bg img:first-child{opacity:1}
+  }
+</style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <img src="assets/redirect/pink-cadillac.jpg" alt="">
+    <img src="assets/redirect/premier-club.jpg" alt="">
+    <img src="assets/redirect/grand-achiever.jpg" alt="">
+  </div>
+  <div class="veil" aria-hidden="true"></div>
+  <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+
+  <main>
+    <p class="eyebrow">Independent Beauty Consultant</p>
+    <h1>Mary Kay</h1>
+    <p class="by">with Hali Sarah</p>
+    <div class="rule"></div>
+
+    <div class="loader" role="progressbar" aria-label="Loading">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <defs>
+          <linearGradient id="gPink" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#e8507a"/><stop offset="1" stop-color="#f6a9c3" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="gGold" x1="1" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ead5a8"/><stop offset="1" stop-color="#c9a96e" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+        <g class="ring-a" style="transform-origin:50px 50px">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="url(#gPink)" stroke-width="3" stroke-linecap="round" stroke-dasharray="190 300"/>
+        </g>
+        <g class="ring-b" style="transform-origin:50px 50px">
+          <circle cx="50" cy="50" r="38" fill="none" stroke="url(#gGold)" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="70 170"/>
+        </g>
+        <g class="ring-c" style="transform-origin:50px 50px">
+          <circle cx="50" cy="4" r="3" fill="#f6a9c3"/>
+        </g>
+      </svg>
+      <div class="core">mk</div>
+    </div>
+
+    <p class="status" aria-live="polite"><span id="msg">Prepping your glow</span></p>
+    <div class="bar"><b id="bar"></b></div>
+    <a class="skip" id="skip" href="https://sistahaymarykay.wixsite.com/marykay">Continue now</a>
+    <noscript><p class="status">Redirecting… <a class="skip" href="https://sistahaymarykay.wixsite.com/marykay">tap here</a></p></noscript>
+  </main>
+
+<script>
+/**
+ * WHY: one place to change the destination. Swap in the Wix URL here (and in the
+ * meta refresh + the two links above) when it's ready.
+ */
+const TARGET = "https://sistahaymarykay.wixsite.com/marykay";
+const DURATION = 4200; // ms — long enough for the brand reveal + two status lines, short enough not to annoy
+
+/**
+ * WHY: carry UTM / fbclid params through so Facebook Pixel and ad tracking still
+ * attribute the visit after the hop. URL() is used so existing query strings merge safely.
+ */
+function buildTarget(){
+  try{
+    const url = new URL(TARGET);
+    new URLSearchParams(location.search).forEach((v,k)=>url.searchParams.set(k,v));
+    if(location.hash) url.hash = location.hash;
+    return url.toString();
+  }catch(e){
+    // WHY: a malformed TARGET should still send people somewhere instead of throwing
+    return TARGET;
+  }
+}
+const dest = buildTarget();
+document.getElementById("skip").href = dest;
+
+/** WHY: a handful of JS-placed sparkles keeps markup clean and lets positions vary per visit */
+(function makeSparkles(){
+  const box = document.getElementById("sparkles");
+  for(let i=0;i<18;i++){
+    const s = document.createElement("i");
+    s.style.left = Math.random()*100 + "vw";
+    s.style.animationDuration = (5 + Math.random()*5) + "s";
+    s.style.animationDelay = (Math.random()*5) + "s";
+    box.appendChild(s);
+  }
+})();
+
+/** WHY: rotating copy with ~1.3s breathing room between lines matches the brand pacing */
+(function cycleStatus(){
+  const lines = ["Prepping your glow","Pinking things up","Almost there"];
+  const el = document.getElementById("msg");
+  let i = 0;
+  const id = setInterval(()=>{
+    el.classList.add("out");
+    setTimeout(()=>{ i = (i+1)%lines.length; el.textContent = lines[i]; el.classList.remove("out"); }, 500);
+    if(i === lines.length-2) clearInterval(id);
+  }, 1300);
+})();
+
+/** WHY: requestAnimationFrame keeps the bar in sync with the real redirect timer, even if tabs throttle */
+(function run(){
+  const bar = document.getElementById("bar");
+  const start = performance.now();
+  function tick(now){
+    const p = Math.min((now-start)/DURATION, 1);
+    bar.style.width = (p*100) + "%";
+    if(p < 1) requestAnimationFrame(tick);
+    // WHY: replace() keeps this splash out of history so the Back button doesn't bounce users here again
+    else location.replace(dest);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
