@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do You Qualify For a New Skincare Regimen?</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --pink:#e8507a; --pink-dark:#c93a62; --gold:#c9a96e; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { width:100%; height:100%; overflow:hidden; position:fixed; background:radial-gradient(ellipse at 20% 50%,#3d0a1e 0%,#1a0d13 50%,#0d0608 100%); font-family:'Jost',sans-serif; display:flex; align-items:center; justify-content:center; text-align:center; }
+  .orb { position:absolute; border-radius:50%; filter:blur(70px); opacity:0; animation:floatOrb 5s ease-in-out infinite; pointer-events:none; z-index:0; }
+  .orb1 { width:500px; height:500px; background:#e8507a55; top:-100px; left:-100px; animation-delay:0s; }
+  .orb2 { width:400px; height:400px; background:#c9a96e44; bottom:-80px; right:-80px; animation-delay:0.8s; }
+  .orb3 { width:300px; height:300px; background:#e8507a44; top:40%; left:60%; animation-delay:1.5s; }
+  .orb4 { width:200px; height:200px; background:#c9a96e55; top:20%; right:20%; animation-delay:0.3s; }
+  @keyframes floatOrb { 0%{opacity:0;transform:translate(0,0) scale(1)} 20%{opacity:1} 50%{opacity:0.85;transform:translate(20px,-30px) scale(1.15)} 80%{opacity:1} 100%{opacity:0;transform:translate(0,0) scale(1)} }
+  .home-particles { position:absolute; inset:0; pointer-events:none; z-index:1; }
+  .hp { position:absolute; border-radius:50%; opacity:0; animation:hdrift linear infinite; }
+  @keyframes hdrift { 0%{opacity:0;top:110%} 5%{opacity:0.9} 50%{opacity:0.7} 95%{opacity:0.3} 100%{opacity:0;top:-5%} }
+  .ring-wrap { position:absolute; width:700px; height:700px; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; opacity:0; animation:hfadeIn 2s ease forwards; animation-delay:0.5s; z-index:0; }
+  @keyframes hfadeIn { to{opacity:1} }
+  .hring { position:absolute; inset:0; border-radius:50%; border:1px solid rgba(201,169,110,0.07); animation:hspin linear infinite; }
+  .hring1{animation-duration:60s;} .hring2{inset:40px;border-color:rgba(232,80,122,0.06);animation-duration:45s;animation-direction:reverse;} .hring3{inset:90px;border-color:rgba(201,169,110,0.05);animation-duration:80s;}
+  .hring1::before,.hring2::before,.hring3::before{content:'';position:absolute;width:5px;height:5px;border-radius:50%;top:-2.5px;left:50%;transform:translateX(-50%);background:var(--gold);box-shadow:0 0 8px var(--gold);}
+  .hring2::before{background:var(--pink);box-shadow:0 0 8px var(--pink);}
+  @keyframes hspin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  .hcorner{position:absolute;width:28px;height:28px;opacity:0;animation:hfadeIn 1s ease forwards;animation-delay:1.8s;pointer-events:none;z-index:2;}
+  .hcorner::before,.hcorner::after{content:'';position:absolute;background:rgba(201,169,110,0.35);}
+  .hcorner::before{width:1px;height:100%;} .hcorner::after{width:100%;height:1px;}
+  .htl{top:16px;left:16px;} .htr{top:16px;right:16px;transform:scaleX(-1);} .hbl{bottom:16px;left:16px;transform:scaleY(-1);} .hbr{bottom:16px;right:16px;transform:scale(-1);}
+  .content{position:relative;z-index:2;}
+  .hero-badge{font-weight:300;letter-spacing:4px;font-size:11px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;opacity:0;animation:hfadeUp 1s ease forwards;animation-delay:0.3s;}
+  .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,6vw,4rem);font-weight:300;color:white;line-height:1.2;margin-bottom:16px;opacity:0;animation:hfadeUp 1s ease forwards;animation-delay:0.5s;}
+  .hero-title span{font-style:italic;color:var(--gold);}
+  .hero-divider{width:60px;height:1px;background:var(--gold);margin:0 auto 50px;opacity:0;animation:hfadeUp 1s ease forwards;animation-delay:0.9s;}
+  @keyframes hfadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .btn-primary{background:var(--pink);color:white;border:none;padding:15px 44px;font-family:'Jost',sans-serif;font-weight:500;font-size:13px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;border-radius:50px;display:inline-block;text-decoration:none;line-height:1;box-shadow:0 10px 40px rgba(232,80,122,0.4);overflow:hidden;position:relative;opacity:0;animation:hfadeUp 1s ease forwards;animation-delay:1.2s;transition:all 0.3s ease;}
+  .btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);animation:hshimmer 3s ease infinite;animation-delay:2.2s;}
+  @keyframes hshimmer{0%{left:-100%}60%{left:150%}100%{left:150%}}
+  .btn-primary:hover{background:var(--pink-dark);transform:translateY(-2px);}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div><div class="orb orb4"></div>
+<div class="home-particles" id="home-particles"></div>
+<div class="ring-wrap"><div class="hring hring1"></div><div class="hring hring2"></div><div class="hring hring3"></div></div>
+<div class="hcorner htl"></div><div class="hcorner htr"></div><div class="hcorner hbl"></div><div class="hcorner hbr"></div>
+<div class="content">
+  <div class="hero-badge">Mary Kay &nbsp;·&nbsp; Skin Assessment</div>
+  <div class="hero-title">Do You Qualify For a<br><span>New Skincare Regimen?</span></div>
+  <div class="hero-divider"></div>
+  <a href="https://marykay.iqproductionz.com/Assess" class="btn-primary">Apply Now</a>
+</div>
+<script>
+(function(){
+  var c=document.getElementById('home-particles');
+  if(!c)return;
+  for(var i=0;i<60;i++){
+    var p=document.createElement('div');
+    p.className='hp';
+    p.style.left=(Math.random()*100)+'%';
+    var sz=(Math.random()*1.5+1)+'px';
+    p.style.width=sz;p.style.height=sz;
+    p.style.animationDuration=(Math.random()*10+8)+'s';
+    p.style.animationDelay=(Math.random()*8)+'s';
+    var col=i%3!==0?'#c9a96e':'#e8507a';
+    p.style.background=col;
+    p.style.boxShadow='0 0 6px '+col+', 0 0 12px '+col;
+    p.style.opacity='0';
+    c.appendChild(p);
+  }
+})();
+</script>
+</body>
+</html>
